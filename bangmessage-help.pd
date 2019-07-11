@@ -1,0 +1,10 @@
+#N canvas 443 262 450 300 10;
+#X obj 128 64 loadbang;
+#X msg 128 85 1;
+#X obj 128 106 metro 1000;
+#X obj 128 127 bangmessage;
+#X obj 128 148 print;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
