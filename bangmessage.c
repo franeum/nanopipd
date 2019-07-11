@@ -14,8 +14,8 @@ typedef struct _bangmessage {
 void bangmessage_bang(t_bangmessage *x)
 {
   //post("Hello world !!");
-  count++;
-  if (count % 2 == 1) {
+  x->count++;
+  if (x->count % 2 == 1) {
     post("LED ON");
     digitalWrite(x->led, HIGH);
   } else {
@@ -30,8 +30,8 @@ void *bangmessage_new(void)
   t_bangmessage *x = (t_bangmessage *)pd_new(bangmessage_class);
   if (wiringPiSetup() == -1) post("wiringPi not loaded!");
   x->led = 7;
-  pinMode(led, OUTPUT);
-  count = 0;
+  pinMode(x->led, OUTPUT);
+  x->count = 0;
   return (void *)x;
 }
 
