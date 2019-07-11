@@ -13,7 +13,7 @@ typedef struct _bangmessage {
 
 void bangmessage_bang(t_bangmessage *x)
 {
-  //post("Hello world !!");
+  /*
   count++;
   if (count % 2 == 1) {
     post("LED ON");
@@ -21,6 +21,11 @@ void bangmessage_bang(t_bangmessage *x)
   } else {
     post("LED OFF");
     digitalWrite(x->led, LOW);
+  }
+  */
+  for (int i=99; i>=0; i--) {
+    softPwmWrite(x->led, i);
+    delay(10);
   }
 }
 
@@ -31,6 +36,7 @@ void *bangmessage_new(void)
   if (wiringPiSetup() == -1) post("wiringPi not loaded!");
   x->led = 7;
   pinMode(led, OUTPUT);
+  softPwmCreate(x->led, 0, 100);
   count = 0;
   return (void *)x;
 }
