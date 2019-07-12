@@ -1,5 +1,6 @@
 #include "m_pd.h"
 #include <wiringPi.h>
+#include <softPwm.h>
 
 static t_class *bangmessage_class;
 
@@ -23,6 +24,7 @@ void bangmessage_bang(t_bangmessage *x)
     digitalWrite(x->led, LOW);
   }
   */
+  post("Boom!");
   for (int i=99; i>=0; i--) {
     softPwmWrite(x->led, i);
     delay(10);
@@ -35,9 +37,9 @@ void *bangmessage_new(void)
   t_bangmessage *x = (t_bangmessage *)pd_new(bangmessage_class);
   if (wiringPiSetup() == -1) post("wiringPi not loaded!");
   x->led = 7;
-  pinMode(led, OUTPUT);
+  pinMode(x->led, OUTPUT);
   softPwmCreate(x->led, 0, 100);
-  count = 0;
+  x->count = 0;
   return (void *)x;
 }
 
